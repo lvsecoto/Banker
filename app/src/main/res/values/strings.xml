@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Banker</string>
+
+    <!--depositor-->
+    <string name="depositor_balance">₥%1$d</string>
+    <string name="depositor_infinite_balance">∞</string>
+    <string name="your_depositor">Your Depositor</string>
+
+    <!--profile-->
+    <string name="profile_description">Description</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_photo">Photo</string>
+
+    <string name="anonymous">Anonymous</string>
+    <string name="indescribable">Indescribable</string>
+
+    <string name="server_address">Server address</string>
+
+    <!--dialog-->
+    <string name="alert_network_connection_error">The network connection error.</string>
+    <string name="alert_confirm_logout">Logout?</string>
+
+    <!--action-->
+    <string name="join_bank">Join Bank</string>
+    <string name="create_bank">Create Bank</string>
+    <string name="logout">Logout</string>
+
+    <string name="transfer">transfer</string>
+    <string name="banker_info">Banker info</string>
+    <string name="is_also_join_bank">Also join bank?</string>
+
+    <!--state-->
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="invalid">Invalid</string>
+</resources>
