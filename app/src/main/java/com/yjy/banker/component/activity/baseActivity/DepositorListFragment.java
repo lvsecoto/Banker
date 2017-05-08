@@ -219,7 +219,7 @@ public abstract class DepositorListFragment extends ListFragment {
 
             if (convertView == null) {
                 convertView = mActivity.getLayoutInflater().inflate(
-                        R.layout.list_item_depositor, null);
+                        R.layout.list_item_depositor, parent, false);
                 holder = getViewHolder(convertView);
                 convertView.setTag(holder);
             } else {
@@ -248,6 +248,8 @@ public abstract class DepositorListFragment extends ListFragment {
         private void setBackGroundDrawable(ViewHolder holder, AccountID accountID) {
             if (accountID.equals(mAccountID)) {
                 holder.container.setBackgroundResource(R.drawable.list_item_depositor_owner);
+            } else if (accountID.getID() == 0) {
+                holder.container.setBackgroundResource(R.drawable.list_item_depositor_banker);
             } else {
                 holder.container.setBackgroundResource(R.drawable.list_item_depositor);
             }

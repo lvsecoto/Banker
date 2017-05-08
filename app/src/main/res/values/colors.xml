@@ -10,6 +10,7 @@
 
     <color name="dark_87">#dd000000</color>
     <color name="dark_54">#8a000000</color>
+    <color name="dark_5">#0c000000</color>
     <color name="light_100">#ffffff</color>
 
     <color name="colorPrimary">@color/green_500</color>
