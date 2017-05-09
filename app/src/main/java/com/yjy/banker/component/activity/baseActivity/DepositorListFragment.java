@@ -45,6 +45,7 @@ public abstract class DepositorListFragment extends ListFragment {
 
     private UserFactory mUserFactory;
     private String mServerAddress;
+    private ArrayList<AccountID> mAccountIDList = new ArrayList<>();
 
     public static class Arguments implements Serializable {
         final AccountID mAccountID;
@@ -61,16 +62,10 @@ public abstract class DepositorListFragment extends ListFragment {
                 public void onUpdate(@Nullable HashMap<AccountID, Integer> data, int what) {
                     mBalanceList = data;
 
-                    mAdapter.clear();
-                    if (data != null) {
-                        if (Build.VERSION.SDK_INT >= 11) {
-                            mAdapter.addAll(data.keySet());
-                        } else {
-                            for (AccountID id : data.keySet()) {
-                                mAdapter.add(id);
-                            }
-                        }
-                    }
+                    mAccountIDList.clear();
+                    addToAccountIDList(mBalanceList);
+                    putToTopOfList(mAccountIDList, mAccountID);
+
                     mAdapter.notifyDataSetChanged();
                     Logger.i("Adapter update.");
                 }
@@ -122,7 +117,7 @@ public abstract class DepositorListFragment extends ListFragment {
         mServerAddress = arguments.mServerString;
         mUserFactory = new UserFactory(mActivity, mAccountID, mServerAddress);
 
-        mAdapter = new DepositorAdapter(new ArrayList<AccountID>());
+        mAdapter = new DepositorAdapter(mAccountIDList);
         setListAdapter(mAdapter);
     }
 
@@ -194,6 +189,24 @@ public abstract class DepositorListFragment extends ListFragment {
             if (actionBar != null) {
                 actionBar.setSubtitle(serverAddress);
             }
+        }
+    }
+
+    private void addToAccountIDList(@Nullable HashMap<AccountID, Integer> balanceList) {
+        if (balanceList != null) {
+            if (Build.VERSION.SDK_INT >= 11) {
+                mAccountIDList.addAll(balanceList.keySet());
+            } else {
+                for (AccountID id : balanceList.keySet()) {
+                    mAccountIDList.add(id);
+                }
+            }
+        }
+    }
+
+    private void putToTopOfList(ArrayList<AccountID> balanceList, AccountID accountID) {
+        if (balanceList.remove(accountID)) {
+            balanceList.add(0, accountID);
         }
     }
 
