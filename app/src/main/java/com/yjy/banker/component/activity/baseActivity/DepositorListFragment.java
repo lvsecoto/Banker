@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -275,6 +276,12 @@ public abstract class DepositorListFragment extends ListFragment {
 
             Integer balance = mBalanceList.get(accountID);
             holder.balanceTextView.setText(getBalanceString(balance));
+
+            if (accountID.getID() == 0) {
+                holder.balanceTextView.setBackgroundColor(
+                        ContextCompat.getColor(mActivity, R.color.colorAccent)
+                );
+            }
         }
 
         private String getBalanceString(Integer balance) {
