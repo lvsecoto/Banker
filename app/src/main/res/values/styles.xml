@@ -10,5 +10,16 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
+
+        <item name="actionModeBackground">@color/colorAccent</item>
+    </style>
+
+    <style name="editActionEditText">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/primaryTextSize</item>
+        <item name="android:background">@drawable/edit_action_edit_text</item>
+        <item name="android:enabled">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
     </style>
 </resources>

@@ -24,6 +24,8 @@
     <string name="join_bank">Join Bank</string>
     <string name="create_bank">Create Bank</string>
     <string name="logout">Logout</string>
+    <string name="edit">edit</string>
+    <string name="done">done</string>
 
     <string name="transfer">transfer</string>
     <string name="banker_info">Banker info</string>
