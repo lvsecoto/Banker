@@ -9,9 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.AppCompatActivity;
+import android.view.*;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.yjy.banker.R;
@@ -19,6 +18,7 @@ import com.yjy.banker.bank.account.AccountID;
 import com.yjy.banker.bank.account.Profile;
 import com.yjy.banker.component.activity.baseActivity.OnBackPressedListener;
 import com.yjy.banker.component.activity.dialog.Dialogs;
+import com.yjy.banker.component.activity.util.EditActionMode;
 import com.yjy.banker.handleableThread.HandleableThread;
 import com.yjy.banker.handleableThread.OnHandleListener;
 import com.yjy.banker.handleableThread.SetProfileThread;
@@ -42,6 +42,7 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
     private AccountID mAccountID;
 
     private Dialogs mDialogs;
+    private EditActionMode mEditActionModes;
 
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
@@ -99,6 +100,7 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mDialogs = new Dialogs(this);
 
         Arguments arguments = (Arguments) getArguments().getSerializable(EXTRA_ARGUMENTS);
@@ -134,14 +136,13 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
         view.findViewById(R.id.logout).setOnClickListener(this);
 
         mDescriptionEditText.setHint("id: " + mAccountID.getID());
-        mNameEditText.setText(mProfile.getName());
-        mDescriptionEditText.setText(mProfile.getDescription());
+        showInfoFromProfile(mProfile);
+        showServerAddress();
 
-        new GetBankServerAddressThread(
-                mOnGetBankServerAddressUpdateListener
-        ).start();
+        mEditActionModes = createEditActionModes();
+        mEditActionModes.add(mNameEditText);
+        mEditActionModes.add(mDescriptionEditText);
 
-        mServerAddressText.setEnabled(false);
 
         return view;
     }
@@ -183,21 +184,66 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onBackPressed() {
-        saveConfigure();
         mActivity.setResult(Activity.RESULT_OK, mResultData);
     }
 
-    private void saveConfigure() {
-        if (isProfileChanged()) {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_banker_info, menu);
+    }
 
-            mProfile.setName(mNameEditText.getText().toString());
-            mProfile.setDescription(mDescriptionEditText.getText().toString());
-
-            UserFactory userFactory = new UserFactory(mActivity, mAccountID, mServerAddress);
-            new SetProfileThread(userFactory, mProfile, null)
-                    .start();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.edit:
+                mEditActionModes.start();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @NonNull
+    private EditActionMode createEditActionModes() {
+        final EditActionMode editActionModes =
+                new EditActionMode((AppCompatActivity) getActivity());
+
+        editActionModes.setOnActionModeFinishedListener(new EditActionMode.onActionModeFinishedListener() {
+            @Override
+            public void onFinished(Boolean isDone) {
+                if (isDone) {
+                    updateProfile(BankerInfoFragment.this.mProfile);
+                } else {
+                    showInfoFromProfile(BankerInfoFragment.this.mProfile);
+                }
+            }
+        });
+        return editActionModes;
+    }
+
+    private void showInfoFromProfile(Profile profile) {
+        mNameEditText.setText(profile.getName());
+        mDescriptionEditText.setText(mProfile.getDescription());
+    }
+
+    private void showServerAddress() {
+        new GetBankServerAddressThread(
+                mOnGetBankServerAddressUpdateListener
+        ).start();
+    }
+
+    private void updateProfile(Profile profile) {
+        if (!isProfileChanged()) {
+            return;
+        }
+
+        profile.setName(mNameEditText.getText().toString());
+        profile.setDescription(mDescriptionEditText.getText().toString());
+
+        UserFactory userFactory = new UserFactory(mActivity, mAccountID, mServerAddress);
+        new SetProfileThread(userFactory, profile, null)
+                .start();
     }
 
     private boolean isProfileChanged() {
