@@ -25,7 +25,7 @@ public class RequestApplySuperAccountTest {
         applySuperAccountRequire.setBankService(bankService);
         applySuperAccountRequire.execute();
         AccountID accountID = applySuperAccountRequire.getSuperAccountID();
-        assertEquals(0, accountID.getID());
+        assertEquals(1, accountID.getID());
     }
 
 }

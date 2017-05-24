@@ -1,5 +1,7 @@
 package com.yjy.banker.bank.bank;
 
+import com.yjy.banker.bank.Persistence.BankDatabaseMocker;
+import com.yjy.banker.bank.account.AccountManager;
 import com.yjy.banker.bank.account.BaseAccountManager;
 import com.yjy.banker.bank.communication.BankServer;
 import com.yjy.banker.bank.service.BankService;
@@ -11,10 +13,13 @@ public class BaseBank implements Bank {
     private final BankService bankService;
     private final BankServer bankServer;
 
-    public BaseBank() {
-        BaseAccountManager accountManager = new BaseAccountManager();
+    public BaseBank(AccountManager accountManager) {
         bankService = new BaseBankService(accountManager);
         bankServer = new BankServer(bankService);
+    }
+
+    public BaseBank() {
+        this(BaseAccountManager.createFrom(new BankDatabaseMocker()));
     }
 
     @Override

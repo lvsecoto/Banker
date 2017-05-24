@@ -28,15 +28,14 @@ public class RequestGetModifiedCountersTest {
     }
 
     @Test
-    public void name() throws Exception {
+    public void getModifiedCounter() throws Exception {
         RequestGetModifiedCounters modifiedCounterRequire =
                 new RequestGetModifiedCounters();
         modifiedCounterRequire = (RequestGetModifiedCounters)
                 BankServer.executeRequireCommandAndGetResult(modifiedCounterRequire, mBankService);
 
-        assertEquals(5, modifiedCounterRequire.getBalanceListModifiedCounter());
-        assertEquals(3, modifiedCounterRequire.getAccountIDListModifiedCounter());
-        assertEquals(1, modifiedCounterRequire.getProfileListModifiedCounter());
+        assertEquals(4, modifiedCounterRequire.getBalanceListModifiedCounter());
+        assertEquals(4, modifiedCounterRequire.getProfileListModifiedCounter());
 
     }
 
