@@ -183,6 +183,10 @@ public class Login {
             );
         }
 
+        if (accountManager == null) {
+            return null;
+        }
+
         return new BaseBank(accountManager);
     }
 

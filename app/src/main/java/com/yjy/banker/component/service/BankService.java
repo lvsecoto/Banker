@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 import com.orhanobut.logger.Logger;
+import com.yjy.banker.R;
 import com.yjy.banker.bank.bank.Bank;
 import com.yjy.banker.utils.Login;
 
@@ -40,7 +42,18 @@ public class BankService extends Service {
     public void onCreate() {
         super.onCreate();
         Logger.d("Server created.");
-        mBank = Login.newInstance(getApplicationContext()).getBank();
+        Login login = Login.newInstance(getApplicationContext());
+        mBank = login.getBank();
+        if (mBank == null) {
+            Toast.makeText(
+                    this,
+                    R.string.alert_failed_to_load_account_data,
+                    Toast.LENGTH_LONG
+            ).show();
+            login.logout();
+            stopSelf();
+        }
+
         mBank.startServerWithThread();
     }
 
@@ -55,7 +68,9 @@ public class BankService extends Service {
         super.onDestroy();
         Logger.d("Server stop.");
         try {
-            mBank.stopServer();
+            if (mBank != null) {
+                mBank.stopServer();
+            }
         } catch (IOException e) {
             Logger.e("Bank Server closed with error", e);
         }
