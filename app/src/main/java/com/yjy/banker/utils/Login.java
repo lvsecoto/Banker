@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import com.yjy.banker.bank.Persistence.BankDatabase;
 import com.yjy.banker.bank.account.AccountID;
+import com.yjy.banker.bank.account.AccountManager;
+import com.yjy.banker.bank.account.BaseAccountManager;
+import com.yjy.banker.bank.bank.Bank;
+import com.yjy.banker.bank.bank.BaseBank;
 import com.yjy.banker.component.service.BankService;
 
 public class Login {
@@ -14,6 +19,9 @@ public class Login {
     private static final String PREF_MODE = "mode";
     private static final String PREF_SERVER_ADDRESS = "server_address";
     private static final String PREF_ACCOUNT_ID = "account_id";
+
+    private static final String PREF_BANK_CREATE_TIME = "PREF_BANK_CREATE_TIME";
+    private static final String PREF_BANK_DATABASE_CREATE_TIME = "PREF_BANK_DATABASE_CREATE_TIME";
 
     public static final int MODE_NULL = 0;
     public static final int MODE_USER = 1;
@@ -159,5 +167,46 @@ public class Login {
                 setServerAddress("127.0.0.1");
                 break;
         }
+    }
+
+    public Bank getBank() {
+        AccountManager accountManager;
+
+        if (isBankDataBaseIsOld()) {
+            accountManager = BaseAccountManager.createFrom(
+                    new BankDatabase(mContext)
+            );
+            updateBankDataBaseCreateDate();
+        } else {
+            accountManager = BaseAccountManager.loadFrom(
+                    new BankDatabase(mContext)
+            );
+        }
+
+        return new BaseBank(accountManager);
+    }
+
+    private boolean isBankDataBaseIsOld() {
+        long bankCreateTime = mSharePreference.getLong(PREF_BANK_CREATE_TIME, 0);
+        long bankDatabaseCreateTime = mSharePreference.getLong(PREF_BANK_DATABASE_CREATE_TIME, 0);
+
+        return bankDatabaseCreateTime < bankCreateTime;
+    }
+
+    private void updateBankCreateDate() {
+        mSharePreference.edit()
+                .putLong(PREF_BANK_CREATE_TIME, System.currentTimeMillis())
+                .apply();
+    }
+
+    private void updateBankDataBaseCreateDate() {
+        mSharePreference.edit()
+                .putLong(PREF_BANK_DATABASE_CREATE_TIME, System.currentTimeMillis())
+                .apply();
+    }
+
+    public void initBank() {
+        stopBankService();
+        updateBankCreateDate();
     }
 }

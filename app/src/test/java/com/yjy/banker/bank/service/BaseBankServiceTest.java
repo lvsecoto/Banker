@@ -24,7 +24,6 @@ public class BaseBankServiceTest {
         superAccountID = bankService.applySupperAccount();
         accountID = bankService.applyAccount();
         anotherAccountID = bankService.applyAccount();
-        assertEquals(3, bankService.getAccountIDListModifiedCounter());
     }
 
     @Test
@@ -36,13 +35,13 @@ public class BaseBankServiceTest {
     @SuppressWarnings("StatementWithEmptyBody")
     @Test
     public void transferBetweenTwoAccountWithTwoThread() throws Exception {
-        long modifiedCounterBefore = bankService.getAccountIDListModifiedCounter();
+        long modifiedCounterBefore = bankService.getBalanceListModifiedCounter();
+
+        bankService.transferMoney(superAccountID, accountID, 100);
+        assertEquals(1, bankService.getBalanceListModifiedCounter() - modifiedCounterBefore);
 
         bankService.transferMoney(superAccountID, accountID, 100);
         assertEquals(2, bankService.getBalanceListModifiedCounter() - modifiedCounterBefore);
-
-        bankService.transferMoney(superAccountID, accountID, 100);
-        assertEquals(4, bankService.getBalanceListModifiedCounter() - modifiedCounterBefore);
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -77,7 +76,7 @@ public class BaseBankServiceTest {
 
         assertEquals(200, bankService.getBalance(accountID) + bankService.getBalance(anotherAccountID));
 
-        assertEquals(404, bankService.getBalanceListModifiedCounter() - modifiedCounterBefore);
+        assertEquals(202, bankService.getBalanceListModifiedCounter() - modifiedCounterBefore);
 
     }
 

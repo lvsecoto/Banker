@@ -33,56 +33,54 @@ public class BaseBankService implements BankService {
     public boolean transferMoney(AccountID superAccountID, AccountID accountID, int money)
             throws IllegalAccountIDException {
         synchronized (accountManager) {
-            return accountManager.transferMoney(superAccountID, accountID, money);
+            return accountManager.getBalanceManager().transferMoney(superAccountID, accountID, money);
         }
     }
 
     @Override
     public int getBalance(AccountID accountID) throws IllegalAccountIDException {
         synchronized (accountManager) {
-            return accountManager.getBalance(accountID);
+            return accountManager.getBalanceManager().getBalanceList().get(accountID);
         }
     }
 
     @Override
     public HashMap<AccountID, Integer> getBalanceList() {
         synchronized (accountManager) {
-            return accountManager.getBalanceList();
+            return accountManager.getBalanceManager().getBalanceList();
         }
     }
 
     @Override
     public long getBalanceListModifiedCounter() {
         synchronized (accountManager) {
-            return accountManager.getBalanceListModifiedCounter();
+            return accountManager.getBalanceManager().getBalanceListModifiedCounter();
         }
     }
 
     @Override
     public long getAccountIDListModifiedCounter() {
-        synchronized (accountManager) {
-            return accountManager.getAccountIDListModifiedCounter();
-        }
+        return 0;
     }
 
     @Override
     public boolean setProfile(AccountID accountID, Profile profile) {
         synchronized (accountManager) {
-            return accountManager.setProfile(accountID, profile);
+            return accountManager.getProfileManager().setProfile(accountID, profile);
         }
     }
 
     @Override
     public HashMap<AccountID, Profile> getProfileList() {
         synchronized (accountManager) {
-            return accountManager.getProfileList();
+            return accountManager.getProfileManager().getProfileList();
         }
     }
 
     @Override
     public long getProfileListModifiedCounter() {
         synchronized (accountManager) {
-            return accountManager.getProfileListModifiedCounter();
+            return accountManager.getProfileManager().getProfileListModifiedCounter();
         }
     }
 }

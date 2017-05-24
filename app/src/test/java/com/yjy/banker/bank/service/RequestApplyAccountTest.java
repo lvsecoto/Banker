@@ -29,6 +29,6 @@ public class RequestApplyAccountTest {
                 (RequestApplyAccount) BankServer.executeRequireCommandAndGetResult(applyAccountRequire, bankService);
 
         AccountID accountID = applyAccountRequire.getAccountID();
-        assertEquals(1, accountID.getID());
+        assertEquals(2, accountID.getID());
     }
 }

@@ -8,7 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import com.orhanobut.logger.Logger;
 import com.yjy.banker.bank.bank.Bank;
-import com.yjy.banker.bank.bank.BaseBank;
+import com.yjy.banker.utils.Login;
 
 import java.io.IOException;
 
@@ -40,7 +40,7 @@ public class BankService extends Service {
     public void onCreate() {
         super.onCreate();
         Logger.d("Server created.");
-        mBank = new BaseBank();
+        mBank = Login.newInstance(getApplicationContext()).getBank();
         mBank.startServerWithThread();
     }
 

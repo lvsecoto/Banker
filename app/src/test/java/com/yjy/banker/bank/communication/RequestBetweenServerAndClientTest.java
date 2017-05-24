@@ -1,5 +1,6 @@
 package com.yjy.banker.bank.communication;
 
+import com.yjy.banker.bank.Persistence.BankDatabaseMocker;
 import com.yjy.banker.bank.account.BaseAccountManager;
 import com.yjy.banker.bank.service.AbstractRequest;
 import com.yjy.banker.bank.service.BaseBankService;
@@ -18,7 +19,14 @@ public class RequestBetweenServerAndClientTest {
 
     @Before
     public void setUp() throws Exception {
-        bankServer = new BankServer(new BaseBankService(new BaseAccountManager()));
+        bankServer =
+                new BankServer(
+                        new BaseBankService(
+                                BaseAccountManager.createFrom(
+                                        new BankDatabaseMocker()
+                                )
+                        )
+                );
         bankClient = new BankClient(
                 bankServer.getAddressName(),
                 bankServer.getPort()

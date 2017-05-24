@@ -138,6 +138,7 @@ public class LauncherFragment extends Fragment implements View.OnClickListener {
     }
 
     private void beBanker() {
+        mLogin.initBank();
         BankService.startAndBindService(mContext, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -156,6 +157,7 @@ public class LauncherFragment extends Fragment implements View.OnClickListener {
     }
 
     public void beBankerWithUser() {
+        mLogin.initBank();
         mOnUpdateListener = new ApplyAccountIDThread.OnUpdateListener() {
             @Override
             public void onUpdate(@Nullable AccountID accountID, int what) {
