@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false">
-        <shape android:shape="rectangle">
-            <size android:height="48dp"/>
-            <solid android:color="#00000000"/>
-        </shape>
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape android:shape="rectangle">
+                    <size android:height="32dp"/>
+                    <solid android:color="#00000000"/>
+                </shape>
+            </item>
+        </layer-list>
     </item>
 
     <item android:state_focused="false">
         <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
             <item>
                 <shape android:shape="rectangle">
-                    <size android:height="48dp"/>
+                    <size android:height="32dp"/>
                     <solid android:color="#00000000"/>
                 </shape>
             </item>
-            <item android:top="34dp">
+            <item android:top="28dp">
                 <shape android:shape="line">
                     <stroke android:width="2dp"
                             android:color="@color/dark_5"/>
@@ -28,12 +32,12 @@
         <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
             <item>
                 <shape android:shape="rectangle">
-                    <size android:height="48dp"/>
+                    <size android:height="32dp"/>
                     <solid android:color="#00000000"/>
                 </shape>
             </item>
 
-            <item android:top="34dp">
+            <item android:top="28dp">
                 <shape android:shape="line">
                     <stroke android:width="2dp"
                             android:color="@color/colorAccent"/>
