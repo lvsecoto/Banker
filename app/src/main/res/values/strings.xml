@@ -42,4 +42,11 @@
     <string name="label_name">Name:</string>
     <string name="label_description">Description:</string>
 
+    <!--title-->
+    <string name="title_user_fragment">%1$s Bank</string>
+    <string name="title_banker_fragment">My Bank</string>
+    <string name="title_user_info_fragment">Personal</string>
+    <string name="title_banker_info_fragment">Control</string>
+    <string name="title_depositors_fragment">%1$s\'s depositor</string>
+
 </resources>

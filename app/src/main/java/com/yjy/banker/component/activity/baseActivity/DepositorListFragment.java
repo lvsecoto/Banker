@@ -77,9 +77,14 @@ public abstract class DepositorListFragment extends ListFragment {
                 public void onUpdate(@Nullable HashMap<AccountID, Profile> data, int what) {
                     mProfileList = data;
                     mAdapter.notifyDataSetChanged();
+                    onProfileListUpdate(mProfileList);
                     Logger.i("Profile update.");
                 }
             };
+
+    protected void onProfileListUpdate(HashMap<AccountID, Profile> profileList) {
+
+    }
 
     private CheckServerUpdateThread mCheckServerUpdateThread = null;
     private final CheckServerUpdateThread.OnUpdateListener mOnServerUpDateListener =

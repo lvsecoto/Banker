@@ -132,6 +132,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
             mEditActionModes.add(mServerAddressEditText);
         }
 
+        getActivity().setTitle(R.string.title_user_info_fragment);
+
         return view;
     }
 

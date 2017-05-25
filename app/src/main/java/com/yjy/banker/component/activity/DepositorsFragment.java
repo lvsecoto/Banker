@@ -161,6 +161,7 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
         mYourBalanceTextView = (TextView) view.findViewById(R.id.your_balance);
 
         showInfoOnView();
+        showTitle();
         return view;
     }
 
@@ -169,6 +170,24 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
         super.onResume();
         mCheckServerUpdateThread = new CheckServerUpdateThread(mUserFactory, mCheckServerUpdateListener);
         mCheckServerUpdateThread.start();
+
+    }
+
+    private void showTitle() {
+        getActivity().setTitle(getTitle());
+    }
+
+    private String getTitle() {
+        Profile profile;
+        String name;
+        if (mProfileList == null
+                || (profile = mProfileList.get(mTargetAccountId)) == null
+                || (name = profile.getName()) == null
+                ) {
+            name = getString(R.string.anonymous);
+        }
+
+        return getString(R.string.title_depositors_fragment, name);
     }
 
     @Override

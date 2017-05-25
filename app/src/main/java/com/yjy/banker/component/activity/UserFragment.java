@@ -34,6 +34,20 @@ public class UserFragment extends DepositorListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // invoke after the fragment show by activity.
+        showTitle(getProfileList());
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        // invoke after the fragment show by viewpager.
+        showTitle(getProfileList());
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_user, menu);
     }
@@ -100,5 +114,35 @@ public class UserFragment extends DepositorListFragment {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onProfileListUpdate(HashMap<AccountID, Profile> profileList) {
+        super.onProfileListUpdate(profileList);
+        showTitle(profileList);
+    }
+
+    private void showTitle(HashMap<AccountID, Profile> profileList) {
+        if (!isHidden()) {
+            getActivity().setTitle(getTitle(profileList));
+        }
+    }
+
+    private String getTitle(HashMap<AccountID, Profile> profileList) {
+
+        if (profileList == null) {
+            return null;
+        }
+
+        Profile bankerProfile = profileList.get(new AccountID(1));
+
+        if (bankerProfile == null) {
+            return null;
+        }
+
+        return getString(
+                R.string.title_user_fragment,
+                bankerProfile.getName()
+        );
     }
 }

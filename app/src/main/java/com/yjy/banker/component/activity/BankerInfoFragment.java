@@ -143,6 +143,7 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
         mEditActionModes.add(mNameEditText);
         mEditActionModes.add(mDescriptionEditText);
 
+        getActivity().setTitle(R.string.title_banker_info_fragment);
 
         return view;
     }

@@ -37,6 +37,20 @@ public class BankerFragment extends DepositorListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // invoke after the fragment show by activity.
+        showTitle();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        // invoke after the fragment show by viewpager.
+        showTitle();
+    }
+
+    @Override
     protected Arguments getArgument() {
         return new Arguments(
                 new AccountID(1), "127.0.0.1"
@@ -101,6 +115,16 @@ public class BankerFragment extends DepositorListFragment {
     @Override
     protected void showInfoAtSubTitle(String serverAddress) {
         super.showInfoAtSubTitle("");
+    }
+
+    private void showTitle() {
+        if (!isHidden()) {
+            getActivity().setTitle(getTitle());
+        }
+    }
+
+    private String getTitle() {
+        return getString(R.string.title_banker_fragment);
     }
 }
 
