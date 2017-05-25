@@ -2,7 +2,7 @@
     <string name="app_name">Banker</string>
 
     <!--depositor-->
-    <string name="depositor_balance">₥%1$d</string>
+    <string name="depositor_balance">$%1$d</string>
     <string name="depositor_infinite_balance">∞</string>
     <string name="your_depositor">Your Depositor</string>
 

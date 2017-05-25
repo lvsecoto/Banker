@@ -290,8 +290,8 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
 
     private String getBalanceString(int balance) {
         if (balance == Account.INFINITE) {
-            mContext.getResources().getString(R.string.depositor_balance);
+            return getString(R.string.depositor_infinite_balance);
         }
-        return mContext.getResources().getString(R.string.depositor_balance, balance);
+        return getString(R.string.depositor_balance, balance);
     }
 }
