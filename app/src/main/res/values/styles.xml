@@ -22,4 +22,16 @@
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
     </style>
+
+    <style name="editTextCaption">
+        <item name="android:textSize">@dimen/textSizeCaption</item>
+        <item name="android:textColor">@color/dark_54</item>
+    </style>
+
+    <style name="buttonDangerAction">
+        <item name="android:textSize">@dimen/secondaryTextSize</item>
+        <item name="android:textColor">@color/light_100</item>
+        <item name="android:background">@color/colorDanger</item>
+    </style>
+
 </resources>

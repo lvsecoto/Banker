@@ -36,4 +36,10 @@
     <string name="incorrect">Incorrect</string>
     <string name="invalid">Invalid</string>
     <string name="alert_failed_to_load_account_data">Failed to load account data.</string>
+
+    <!--label-->
+    <string name="label_server_address">ServerAddress:</string>
+    <string name="label_name">Name:</string>
+    <string name="label_description">Description:</string>
+
 </resources>
