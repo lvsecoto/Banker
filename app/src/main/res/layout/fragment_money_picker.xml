@@ -3,10 +3,55 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <EditText android:id="@+id/money"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:hint=""
-              android:inputType="number"
-    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_margin="16dp"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:gravity="center">
+
+            <ImageView android:layout_width="24dp"
+                       android:layout_height="24dp"
+                       android:layout_marginLeft="8dp"
+                       android:layout_marginRight="8dp"
+                       android:layout_weight="0"
+                       android:src="@drawable/ic_photo_default_24dp"/>
+            <TextView android:id="@+id/from_balance"
+                android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="0"
+                      android:gravity="center"
+                      android:textColor="@color/colorPrimary"/>
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:src="@drawable/ic_arrow_forward_grey_500_24dp"/>
+
+            <TextView android:id="@+id/to_balance"
+                android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="0"
+                      android:gravity="center"
+                      android:textColor="@color/colorAccent"/>
+
+            <ImageView android:layout_width="24dp"
+                       android:layout_height="24dp"
+                       android:layout_weight="0"
+                       android:layout_marginLeft="8dp"
+                       android:layout_marginRight="8dp"
+                       android:src="@drawable/ic_photo_default_24dp"/>
+
+        </LinearLayout>
+
+        <EditText android:id="@+id/money"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint=""
+                  android:inputType="number"
+        />
+    </LinearLayout>
 </LinearLayout>

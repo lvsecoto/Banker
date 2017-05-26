@@ -255,7 +255,11 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
     private void showMoneyPickerDialog(String title) {
         dismissMoneyPickerDialog();
         mMoneyPickerDialog = MoneyPickerDialog.newInstance(
-                title, this, REQUEST_TRANSFER_MONEY
+                title,
+                mBalanceList.get(mAccountID),
+                mBalanceList.get(mTargetAccountId),
+                this,
+                REQUEST_TRANSFER_MONEY
         );
         mMoneyPickerDialog.show(mContext);
     }
