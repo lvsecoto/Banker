@@ -22,6 +22,7 @@ public class BankerWithUserActivity extends AppCompatActivity implements View.On
     private FragmentManager mFragmentManager;
 
     private boolean mIsBankerMode;
+    private FloatingActionButton mActionButton;
 
     public static void startActivity(Context context, AccountID accountID) {
         Intent intent = new Intent(context, BankerWithUserActivity.class);
@@ -39,10 +40,11 @@ public class BankerWithUserActivity extends AppCompatActivity implements View.On
 
         prepareFragment();
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id
+        mActionButton = (FloatingActionButton) findViewById(R.id
                 .switch_action);
-        floatingActionButton.setOnClickListener(this);
+        mActionButton.setOnClickListener(this);
 
+        showIconOnActionButton(mIsBankerMode);
     }
 
     private void prepareFragment() {
@@ -71,6 +73,7 @@ public class BankerWithUserActivity extends AppCompatActivity implements View.On
             case R.id.switch_action:
                 mIsBankerMode = !mIsBankerMode;
                 showSwitchFragment(mIsBankerMode);
+                showIconOnActionButton(mIsBankerMode);
                 break;
         }
     }
@@ -90,6 +93,14 @@ public class BankerWithUserActivity extends AppCompatActivity implements View.On
                     .show(mUserFragment)
                     .hide(mBankerFragment)
                     .commit();
+        }
+    }
+
+    private void showIconOnActionButton(boolean isBankerMode) {
+        if (isBankerMode) {
+            mActionButton.setImageResource(R.drawable.ic_bank_white_24dp);
+        } else {
+            mActionButton.setImageResource(R.drawable.ic_user_white_24dp);
         }
     }
 

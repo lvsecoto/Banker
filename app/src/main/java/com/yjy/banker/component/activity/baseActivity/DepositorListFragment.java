@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,7 +127,6 @@ public abstract class DepositorListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        showInfoAtSubTitle(mServerAddress);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -156,7 +153,6 @@ public abstract class DepositorListFragment extends ListFragment {
     protected void setServerAddress(String serverAddress) {
         mServerAddress = serverAddress;
         mUserFactory = new UserFactory(mActivity, mAccountID, mServerAddress);
-        showInfoAtSubTitle(mServerAddress);
     }
 
     @Nullable
@@ -187,15 +183,6 @@ public abstract class DepositorListFragment extends ListFragment {
         GetProfileListThread updateProfileThread =
                 new GetProfileListThread(mUserFactory, mOnProfileListUpdateListener);
         updateProfileThread.start();
-    }
-
-    protected void showInfoAtSubTitle(String serverAddress) {
-        if (mActivity instanceof AppCompatActivity) {
-            ActionBar actionBar = ((AppCompatActivity) mActivity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setSubtitle(serverAddress);
-            }
-        }
     }
 
     private void addToAccountIDList(@Nullable HashMap<AccountID, Integer> balanceList) {

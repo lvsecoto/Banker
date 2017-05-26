@@ -112,11 +112,6 @@ public class BankerFragment extends DepositorListFragment {
         }
     }
 
-    @Override
-    protected void showInfoAtSubTitle(String serverAddress) {
-        super.showInfoAtSubTitle("");
-    }
-
     private void showTitle() {
         if (!isHidden()) {
             getActivity().setTitle(getTitle());
