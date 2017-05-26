@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Banker</string>
 
+    <!--label in launcher fragment-->
+    <string name="label_welcome">WELCOME TO USE BANKER!</string>
+    <string name="label_you_can_join_a_bank">You can join to a bank:</string>
+    <string name="label_or">or</string>
+    <string name="label_you_can_create_a_bank">Create a bank:</string>
+    <string name="label_is_also_join_bank">Also join to the bank?</string>
+
     <!--depositor-->
     <string name="depositor_balance">$%1$d</string>
     <string name="depositor_infinite_balance">∞</string>
@@ -30,7 +37,6 @@
 
     <string name="transfer">transfer</string>
     <string name="banker_info">Banker info</string>
-    <string name="is_also_join_bank">Also join bank?</string>
 
     <!--state-->
     <string name="correct">Correct</string>

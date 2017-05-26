@@ -3,37 +3,93 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_weight="1"
-                  android:orientation="vertical">
-
-        <EditText android:id="@+id/bank_ip_address"
+    <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight="1"
+                                                android:padding="16dp">
+        <TextView style="@style/Base.TextAppearance.AppCompat.Display1"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:hint="@string/server_address"/>
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:lineSpacingExtra="8dp"
+                  android:textColor="@color/light_100"
+                  android:text="@string/label_welcome"/>
+    </android.support.design.widget.AppBarLayout>
 
-        <TextView android:id="@+id/bank_ip_address_hint"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <Button android:id="@+id/be_user"
+    <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/join_bank"/>
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:stretchColumns="0">
+        <TextView android:text="@string/label_you_can_join_a_bank"
+                  android:layout_marginBottom="8dp"
+                  android:layout_marginTop="8dp"/>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="end">
-        <CheckBox android:id="@+id/be_banker_with_user"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/is_also_join_bank"/>
-        <Button android:id="@+id/be_banker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_bank"/>
-    </LinearLayout>
+        <TableRow android:gravity="center">
+
+            <LinearLayout android:orientation="vertical">
+                <EditText android:id="@+id/bank_ip_address"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:hint="@string/server_address"/>
+                <TextView android:id="@+id/bank_ip_address_hint"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/be_user"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_user_white_24dp"/>
+        </TableRow>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:gravity="center">
+
+            <ImageView android:layout_width="0dp"
+                       android:layout_height="2dp"
+                       android:layout_weight="1"
+                       android:layout_marginLeft="8dp"
+                       android:layout_marginRight="8dp"
+                       android:src="@color/dark_5"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:textSize="@dimen/primaryTextSize"
+                      android:text="@string/label_or"/>
+
+            <ImageView android:layout_width="0dp"
+                       android:layout_height="2dp"
+                       android:layout_weight="1"
+                       android:layout_marginLeft="8dp"
+                       android:layout_marginRight="8dp"
+                       android:src="@color/dark_5"/>
+</LinearLayout>
+
+        <TextView android:text="@string/label_you_can_create_a_bank"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp"/>
+
+        <TableRow android:gravity="center">
+            <CheckBox android:id="@+id/be_banker_with_user"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="16dp"
+                      android:textColor="@color/dark_54"
+                      android:text="@string/label_is_also_join_bank"/>
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/be_banker"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_bank_white_24dp"/>
+        </TableRow>
+    </TableLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
+
 </LinearLayout>

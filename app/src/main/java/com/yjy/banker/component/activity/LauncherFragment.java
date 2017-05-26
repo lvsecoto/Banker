@@ -6,13 +6,13 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,10 +61,10 @@ public class LauncherFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(
                 R.layout.fragment_launcher, container, false);
 
-        Button joinBankButton = (Button) view.findViewById(R.id.be_user);
+        FloatingActionButton joinBankButton = (FloatingActionButton) view.findViewById(R.id.be_user);
         joinBankButton.setOnClickListener(this);
 
-        Button createBankButton = (Button) view.findViewById(R.id.be_banker);
+        FloatingActionButton createBankButton = (FloatingActionButton) view.findViewById(R.id.be_banker);
         createBankButton.setOnClickListener(this);
 
         EditText bankIPAddress = (EditText) view.findViewById(R.id.bank_ip_address);

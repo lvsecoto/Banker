@@ -20,6 +20,11 @@
         <item name="windowNoTitle">true</item>item>
     </style>
 
+    <style name="AppTheme.FullScreen"
+           parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="editActionEditText">
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/primaryTextSize</item>
