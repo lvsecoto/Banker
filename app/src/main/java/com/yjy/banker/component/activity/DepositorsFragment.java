@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 public class DepositorsFragment extends Fragment implements View.OnClickListener {
     public static final String EXTRA_ARGUMENTS = "EXTRA_ARGUMENTS";
     private static final int REQUEST_TRANSFER_MONEY = 1;
+    private Toolbar mToolbar;
 
     static class Arguments implements Serializable {
         private final AccountID mAccountID;
@@ -56,7 +58,6 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
     private MoneyPickerDialog mMoneyPickerDialog;
 
     private TextView mBalanceTextView;
-    private TextView mNameTextView;
     private TextView mYourBalanceTextView;
 
     private AccountID mTargetAccountId;
@@ -157,8 +158,10 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
         view.findViewById(R.id.transfer).setOnClickListener(this);
 
         mBalanceTextView = (TextView) view.findViewById(R.id.depositor_balance);
-        mNameTextView = (TextView) view.findViewById(R.id.depositor_name);
         mYourBalanceTextView = (TextView) view.findViewById(R.id.your_balance);
+        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar.setTitleTextColor(
+                getResources().getColor(R.color.light_100));
 
         showInfoOnView();
         showTitle();
@@ -174,7 +177,7 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
     }
 
     private void showTitle() {
-        getActivity().setTitle(getTitle());
+        mToolbar.setTitle(getTitle());
     }
 
     private String getTitle() {
@@ -265,14 +268,6 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
 
     private void showInfoOnView() {
         showDepositorBalance();
-        showProfile();
-    }
-
-    private void showProfile() {
-        Profile profile;
-        if (mProfileList != null && (profile = mProfileList.get(mTargetAccountId)) != null) {
-            mNameTextView.setText(profile.getName());
-        }
     }
 
     private void showDepositorBalance() {

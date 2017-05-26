@@ -4,7 +4,8 @@
     <!--depositor-->
     <string name="depositor_balance">$%1$d</string>
     <string name="depositor_infinite_balance">∞</string>
-    <string name="your_depositor">Your Depositor</string>
+    <string name="your_balance">Your Balance:</string>
+    <string name="his_her_balance">his/her Balance:</string>
 
     <!--profile-->
     <string name="profile_description">Description</string>

@@ -32,7 +32,8 @@
         <activity android:name="com.yjy.banker.component.activity.BankerWithUserActivity">
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.DepositorsActivity">
+        <activity android:name="com.yjy.banker.component.activity.DepositorsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity android:name="com.yjy.banker.component.activity.UserInfoActivity">
