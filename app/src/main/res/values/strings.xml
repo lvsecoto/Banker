@@ -9,24 +9,31 @@
     <string name="label_is_also_join_bank">Also join to the bank?</string>
 
     <!--depositor-->
-    <string name="depositor_balance">$%1$d</string>
-    <string name="depositor_infinite_balance">∞</string>
+    <string name="depositor_balance"
+    >$%1$d
+    </string>
+    <string name="depositor_infinite_balance"
+    >∞
+    </string>
     <string name="your_balance">Your Balance:</string>
     <string name="his_her_balance">his/her Balance:</string>
 
     <!--profile-->
-    <string name="profile_description">Description</string>
-    <string name="profile_name">Name</string>
     <string name="profile_photo">Photo</string>
 
     <string name="anonymous">Anonymous</string>
     <string name="indescribable">Indescribable</string>
 
-    <string name="server_address">Server address</string>
+    <string name="bank_ip_address">Server address</string>
 
     <!--dialog-->
     <string name="alert_network_connection_error">The network connection error.</string>
-    <string name="alert_confirm_logout">Logout?</string>
+    <string name="alert_confirm_logout">Logout?\nYour account will be no longer accessed.</string>
+    <string name="alert_please_wait">Please wait…</string>
+    <string name="alert_money_input_error">Please input a correct money value</string>
+    <string name="alert_failed_to_transfer_cause_have_not_enough_money">
+        Transfer fail. Do you have enough money?
+    </string>
 
     <!--action-->
     <string name="join_bank">Join Bank</string>
@@ -42,10 +49,12 @@
     <string name="correct">Correct</string>
     <string name="incorrect">Incorrect</string>
     <string name="invalid">Invalid</string>
-    <string name="alert_failed_to_load_account_data">Failed to load account data.</string>
+    <string name="alert_failed_to_load_account_data"
+    >Failed to load account data.
+    </string>
 
     <!--label-->
-    <string name="label_server_address">ServerAddress:</string>
+    <string name="label_bank_ip_address">Bank IP address:</string>
     <string name="label_name">Name:</string>
     <string name="label_description">Description:</string>
 
@@ -55,5 +64,6 @@
     <string name="title_user_info_fragment">Personal</string>
     <string name="title_banker_info_fragment">Control</string>
     <string name="title_depositors_fragment">%1$s\'s depositor</string>
+    <string name="alert_failed_to_find_account">Can\'t not find account ID</string>
 
 </resources>

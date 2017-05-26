@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">大银行家</string>
+    <string name="alert_confirm_logout">注销账户？\n你的账户信息将永远无法访问</string>
+    <string name="alert_failed_to_find_account">此账户ID无法找到</string>
+    <string name="alert_failed_to_load_account_data">无法载入账户数据。</string>
+    <string name="alert_network_connection_error">网络连接错误</string>
+    <string name="alert_money_input_error">请输入正确的金额数目</string>
+    <string name="alert_please_wait">请稍等……</string>
+    <string name="alert_failed_to_transfer_cause_have_not_enough_money">
+        转账失败。您有足够的余额吗？
+    </string>
+    <string name="anonymous">无名氏</string>
+    <string name="banker_info">行长信息</string>
+    <string name="correct">正确</string>
+    <string name="create_bank">创建银行</string>
+    <string name="depositor_balance">$%1$d</string>
+    <string name="depositor_infinite_balance">∞</string>
+    <string name="done">完成</string>
+    <string name="edit">编辑</string>
+    <string name="his_her_balance">TA的余额</string>
+    <string name="incorrect">不正确</string>
+    <string name="indescribable">无描述</string>
+    <string name="invalid">不合法</string>
+    <string name="join_bank">加入银行</string>
+    <string name="label_description">描述：</string>
+    <string name="label_is_also_join_bank">同时加入此银行？</string>
+    <string name="label_name">昵称：</string>
+    <string name="label_or">或者</string>
+    <string name="label_bank_ip_address">银行IP地址：</string>
+    <string name="label_welcome">欢迎使用\n大银行家!</string>
+    <string name="label_you_can_create_a_bank">创建银行：</string>
+    <string name="label_you_can_join_a_bank">你可以加入银行：</string>
+    <string name="logout">注销账户</string>
+    <string name="profile_photo">头像</string>
+    <string name="bank_ip_address">银行IP地址</string>
+    <string name="title_banker_fragment">我的银行</string>
+    <string name="title_banker_info_fragment">控制中心</string>
+    <string name="title_depositors_fragment">%1$s的账户</string>
+    <string name="title_user_fragment">%1$s银行</string>
+    <string name="title_user_info_fragment">个人中心</string>
+    <string name="transfer">转账</string>
+    <string name="your_balance">你的余额：</string>
+</resources>

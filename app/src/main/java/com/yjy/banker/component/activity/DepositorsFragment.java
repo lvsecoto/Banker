@@ -95,16 +95,16 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
                     mDialogs.dismissPleaseWaitDialog();
 
                     if (result == null) {
-                        mDialogs.showMessageDialog("Net Error!");
+                        mDialogs.showMessageDialog(R.string.alert_network_connection_error);
                         return;
                     }
 
                     switch (result) {
                         case RequestTransferMoney.RESULT_FAIL:
-                            mDialogs.showMessageDialog("Transfer fail. Do you have enough money?");
+                            mDialogs.showMessageDialog(R.string.alert_failed_to_transfer_cause_have_not_enough_money);
                             break;
                         case RequestTransferMoney.RESULT_ILLEGAL_ACCOUNT_ID:
-                            mDialogs.showMessageDialog("Can't not find account ID");
+                            mDialogs.showMessageDialog(R.string.alert_failed_to_find_account);
                             break;
                         case RequestTransferMoney.RESULT_SUCCEED:
                             updateBalanceFromServer();
@@ -235,13 +235,13 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
     }
 
     private void startTransferMoney() {
-        showMoneyPickerDialog("Transfer money");
+        showMoneyPickerDialog(getString(R.string.transfer));
     }
 
     private void finishTransferMoney(Intent intent) {
         Integer money = MoneyPickerDialog.getResultMoney(intent);
         if (money == null) {
-            mDialogs.showMessageDialog("Please input a correct number");
+            mDialogs.showMessageDialog(R.string.alert_money_input_error);
             return;
         }
 

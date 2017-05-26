@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import com.yjy.banker.R;
 
 public class Dialogs {
     private final Fragment mDepositorFragment;
@@ -76,7 +77,11 @@ public class Dialogs {
 
     public void showPleaseWaitDialog() {
         dismissPleaseWaitDialog();
-        mWaitDialog = ProgressDialog.show(mDepositorFragment.getContext(), "", "Please wait", true, false);
+        mWaitDialog = ProgressDialog.show(
+                mDepositorFragment.getContext(), "",
+                mDepositorFragment.getContext().getString(R.string.alert_please_wait),
+                true,
+                false);
     }
 
     public void dismissPleaseWaitDialog() {

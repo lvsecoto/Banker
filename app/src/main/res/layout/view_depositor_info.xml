@@ -57,11 +57,11 @@
         <TextView style="@style/editTextCaption"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/label_server_address"/>
+                  android:text="@string/label_bank_ip_address"/>
         <EditText android:id="@+id/server_address"
                   style="@style/editActionEditText"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:hint="@string/server_address"/>
+                  android:hint="@string/bank_ip_address"/>
     </LinearLayout>
 </LinearLayout>
