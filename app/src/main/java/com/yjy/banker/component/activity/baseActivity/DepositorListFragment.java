@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -59,8 +61,9 @@ public abstract class DepositorListFragment extends ListFragment {
     private final GetBalanceListThread.OnUpdateListener mOnBalanceListUpdatedListener =
             new GetBalanceListThread.OnUpdateListener() {
                 public void onUpdate(@Nullable HashMap<AccountID, Integer> data, int what) {
-                    mBalanceList = data;
+                    notifyMyBalanceChanged(data);
 
+                    mBalanceList = data;
                     mAccountIDList.clear();
                     addToAccountIDList(mBalanceList);
                     putToTopOfList(mAccountIDList, mAccountID);
@@ -69,6 +72,36 @@ public abstract class DepositorListFragment extends ListFragment {
                     Logger.i("Adapter update.");
                 }
             };
+
+    private void notifyMyBalanceChanged(@Nullable HashMap<AccountID, Integer> newBalanceList) {
+        if (mBalanceList == null || newBalanceList == null) {
+            return;
+        }
+
+        final View rootView = getView();
+        if (rootView == null) {
+            return;
+        }
+
+        int balanceChange = newBalanceList.get(mAccountID) - mBalanceList.get(mAccountID);
+
+        if (balanceChange > 0) {
+            showSnackBar(rootView,
+                    getString(R.string.alert_you_earn_money, balanceChange));
+        } else if (balanceChange < 0) {
+            showSnackBar(rootView,
+                    getString(R.string.alert_you_pay_money, balanceChange));
+        }
+    }
+
+    private void showSnackBar(@NonNull View rootView, String message) {
+        Snackbar snackbar = Snackbar.make(
+                rootView, message, 1000 * 10);
+        snackbar.getView().setBackgroundColor(
+                getResources().getColor(R.color.colorPrimaryDark)
+        );
+        snackbar.show();
+    }
 
     private final GetProfileListThread.OnUpdateListener mOnProfileListUpdateListener =
             new GetProfileListThread.OnUpdateListener() {
@@ -127,7 +160,12 @@ public abstract class DepositorListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View originView = super.onCreateView(inflater, container, savedInstanceState);
+        CoordinatorLayout rootView = new CoordinatorLayout(getContext());
+        rootView.addView(originView);
+        rootView.setLayoutParams(new CoordinatorLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        return rootView;
     }
 
     @Override

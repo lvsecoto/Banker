@@ -10,6 +10,8 @@
     <string name="alert_failed_to_transfer_cause_have_not_enough_money">
         转账失败。您有足够的余额吗？
     </string>
+    <string name="alert_you_earn_money">恭喜获得 %1$d 元</string>
+    <string name="alert_you_pay_money">您支付了 %1$d! 元</string>
     <string name="anonymous">无名氏</string>
     <string name="banker_info">行长信息</string>
     <string name="correct">正确</string>
