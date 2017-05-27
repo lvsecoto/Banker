@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            tools:ignore="UselessParent">
+
+        <TextView style="@style/TextAppearance.AppCompat.Title"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:textSize="@dimen/primaryTextSize"
+                  android:text="@string/label_input_this_code"/>
+
+        <TextView android:id="@+id/correct_code"
+                  style="@style/TextAppearance.AppCompat.Large"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:paddingLeft="4dp"
+                  android:paddingRight="4dp"
+                  android:gravity="center"
+                  android:elevation="4dp"
+                  android:background="@color/colorDanger"
+                  android:textColor="@color/light_100"
+                  tools:targetApi="lollipop"/>
+
+        <EditText android:id="@+id/input_code"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint=""/>
+    </LinearLayout>
+</LinearLayout>

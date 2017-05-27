@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">大银行家</string>
+    <string name="alert_confirm_close_bank">您确定要关闭这个银行？所有账户数据将会被删除！</string>
     <string name="alert_confirm_logout">注销账户？\n你的账户信息将永远无法访问</string>
     <string name="alert_failed_to_find_account">此账户ID无法找到</string>
     <string name="alert_failed_to_load_account_data">无法载入账户数据。</string>
@@ -15,6 +16,7 @@
     <string name="anonymous">无名氏</string>
     <string name="banker_info">行长信息</string>
     <string name="correct">正确</string>
+    <string name="close_bank">关闭银行</string>
     <string name="create_bank">创建银行</string>
     <string name="depositor_balance">$%1$d</string>
     <string name="depositor_infinite_balance">∞</string>
@@ -26,6 +28,7 @@
     <string name="invalid">不合法</string>
     <string name="join_bank">加入银行</string>
     <string name="label_description">描述：</string>
+    <string name="label_input_this_code">请输入验证码</string>
     <string name="label_is_also_join_bank">同时加入此银行？</string>
     <string name="label_name">昵称：</string>
     <string name="label_or">或者</string>

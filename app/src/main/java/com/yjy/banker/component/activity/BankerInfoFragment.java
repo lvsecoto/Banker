@@ -17,6 +17,7 @@ import com.yjy.banker.R;
 import com.yjy.banker.bank.account.AccountID;
 import com.yjy.banker.bank.account.Profile;
 import com.yjy.banker.component.activity.baseActivity.OnBackPressedListener;
+import com.yjy.banker.component.activity.dialog.CloseBankConfirmDialog;
 import com.yjy.banker.component.activity.dialog.Dialogs;
 import com.yjy.banker.component.activity.util.EditActionMode;
 import com.yjy.banker.handleableThread.HandleableThread;
@@ -33,6 +34,8 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
     public static final String EXTRA_ARGUMENTS = "EXTRA_ARGUMENTS";
 
     private static final String RESULT_IS_LOGOUT = "RESULT_IS_LOGOUT";
+
+    private static final int REQUEST_CLOSE_BANK = 1;
 
     private Activity mActivity;
 
@@ -133,7 +136,7 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
         mNameEditText = (EditText) view.findViewById(R.id.depositor_name);
         mDescriptionEditText = (EditText) view.findViewById(R.id.depositor_description);
         mServerAddressText = (TextView) view.findViewById(R.id.server_address);
-        view.findViewById(R.id.logout).setOnClickListener(this);
+        view.findViewById(R.id.close_bank).setOnClickListener(this);
 
         mDescriptionEditText.setHint("id: " + mAccountID.getID());
         showInfoFromProfile(mProfile);
@@ -157,15 +160,30 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.logout:
-                logout();
+            case R.id.close_bank:
+                String bankerName = getBankerName();
+                CloseBankConfirmDialog closeBankConfirmDialog =
+                        CloseBankConfirmDialog.newInstance(
+                                bankerName,
+                                this,
+                                REQUEST_CLOSE_BANK);
+
+                closeBankConfirmDialog.show(getContext());
                 break;
         }
     }
 
-    private void logout() {
+    private String getBankerName() {
+        String bankerName = mProfile.getName();
+        if (bankerName == null) {
+            bankerName = getString(R.string.anonymous);
+        }
+        return bankerName;
+    }
+
+    private void closeBank() {
         final Login login = Login.newInstance(mActivity);
-        mDialogs.showConfirmDialog(R.string.alert_confirm_logout,
+        mDialogs.showConfirmDialog(R.string.alert_confirm_close_bank,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -203,6 +221,22 @@ public class BankerInfoFragment extends Fragment implements View.OnClickListener
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CLOSE_BANK:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+
+                if (CloseBankConfirmDialog.isCodeCorrect(data)) {
+                    closeBank();
+                }
+
+                break;
+        }
     }
 
     @NonNull
