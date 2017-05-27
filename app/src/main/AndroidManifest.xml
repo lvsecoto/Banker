@@ -17,33 +17,41 @@
                  tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity android:name="com.yjy.banker.component.activity.LauncherActivity"
-                  android:theme="@style/AppTheme.FullScreen">
+                  android:theme="@style/AppTheme.FullScreen"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.BankerActivity">
+        <activity android:name="com.yjy.banker.component.activity.BankerActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.UserActivity">
+        <activity android:name="com.yjy.banker.component.activity.UserActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.BankerWithUserActivity">
+        <activity android:name="com.yjy.banker.component.activity.BankerWithUserActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
         <activity android:name="com.yjy.banker.component.activity.DepositorsActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.UserInfoActivity">
+        <activity android:name="com.yjy.banker.component.activity.UserInfoActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.yjy.banker.component.activity.BankerInfoActivity">
+        <activity android:name="com.yjy.banker.component.activity.BankerInfoActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <service android:name="com.yjy.banker.component.service.BankService">
+        <service android:name="com.yjy.banker.component.service.BankService"
+                 android:screenOrientation="portrait">
         </service>
 
 
