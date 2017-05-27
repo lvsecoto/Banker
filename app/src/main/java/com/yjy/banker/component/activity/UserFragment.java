@@ -140,9 +140,14 @@ public class UserFragment extends DepositorListFragment {
             return null;
         }
 
+        String name = bankerProfile.getName();
+        if (name == null) {
+            name = getString(R.string.anonymous);
+        }
+
         return getString(
                 R.string.title_user_fragment,
-                bankerProfile.getName()
+                name
         );
     }
 }
