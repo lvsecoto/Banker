@@ -44,6 +44,9 @@
     <string name="alert_confirm_close_bank">Are you sure delete the bank? \nAll account
         date will be remove!
     </string>
+    <string name="alert_please_take_this_operation_in_banker_info_fragment">
+        Please take this operation in control center
+    </string>
 
     <!--action-->
     <string name="join_bank">Join Bank</string>

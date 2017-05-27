@@ -8,6 +8,7 @@
     <string name="alert_network_connection_error">网络连接错误</string>
     <string name="alert_money_input_error">请输入正确的金额数目</string>
     <string name="alert_please_wait">请稍等……</string>
+    <string name="alert_please_take_this_operation_in_banker_info_fragment">请在控制中心进行此操作</string>
     <string name="alert_failed_to_transfer_cause_have_not_enough_money">
         转账失败。您有足够的余额吗？
     </string>

@@ -148,6 +148,11 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.logout:
+                if (mLogin.getLoginMode() == Login.MODE_BANK_WITH_USER) {
+                    mDialogs.showMessageDialog(
+                            R.string.alert_please_take_this_operation_in_banker_info_fragment);
+                    return;
+                }
                 logout();
                 break;
         }
