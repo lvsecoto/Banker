@@ -75,7 +75,7 @@
 
         <TableRow android:gravity="center">
             <CheckBox android:id="@+id/be_banker_with_user"
-                      android:layout_marginTop="8dp"
+                      android:layout_marginTop="16dp"
                       android:layout_marginBottom="16dp"
                       android:textColor="@color/dark_54"
                       android:text="@string/label_is_also_join_bank"/>
