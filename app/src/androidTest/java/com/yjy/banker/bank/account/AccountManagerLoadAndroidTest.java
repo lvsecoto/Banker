@@ -16,7 +16,7 @@ import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
-public class BaseAccountManagerLoadAndroidTest {
+public class AccountManagerLoadAndroidTest {
 
     private Context mAppContext;
 
@@ -29,7 +29,7 @@ public class BaseAccountManagerLoadAndroidTest {
     public void recoverDateByLoad() throws Exception {
         LinkedHashMap<AccountID, Integer> expectedBalanceList = initDatabase();
         BankDatabase bankDatabase = new BankDatabase(mAppContext);
-        BaseAccountManager baseAccountManager = BaseAccountManager.loadFrom(bankDatabase);
+        AccountManager baseAccountManager = AccountManager.loadFrom(bankDatabase);
         if (baseAccountManager == null) {
             fail();
         }
@@ -44,7 +44,7 @@ public class BaseAccountManagerLoadAndroidTest {
     private LinkedHashMap<AccountID, Integer> initDatabase() {
         BankDatabase bankDatabase = new BankDatabase(mAppContext);
 
-        BaseAccountManager baseAccountManager = BaseAccountManager.createFrom(bankDatabase);
+        AccountManager baseAccountManager = AccountManager.createFrom(bankDatabase);
 
         AccountID superId = baseAccountManager.applySupperAccount();
         AccountID id = baseAccountManager.applyAccount();
@@ -61,8 +61,8 @@ public class BaseAccountManagerLoadAndroidTest {
         BankDatabase bankDatabase = new BankDatabase(mAppContext);
         bankDatabase.reset();
 
-        BaseAccountManager baseAccountManager =
-                BaseAccountManager.loadFrom(bankDatabase);
+        AccountManager baseAccountManager =
+                AccountManager.loadFrom(bankDatabase);
 
         assertEquals(null, baseAccountManager);
     }
@@ -73,8 +73,8 @@ public class BaseAccountManagerLoadAndroidTest {
         AccountID id = bankDatabase.insertAccount();
         bankDatabase.updateBalance(id, 300);
 
-        BaseAccountManager baseAccountManager =
-                BaseAccountManager.loadFrom(bankDatabase);
+        AccountManager baseAccountManager =
+                AccountManager.loadFrom(bankDatabase);
 
         if (baseAccountManager == null) {
             fail();

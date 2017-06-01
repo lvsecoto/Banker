@@ -2,7 +2,6 @@ package com.yjy.banker.bank.service;
 
 import com.yjy.banker.bank.account.AccountID;
 import com.yjy.banker.bank.bank.Bank;
-import com.yjy.banker.bank.bank.BaseBank;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ public class RequestApplySuperAccountTest {
 
     @Before
     public void setUp() throws Exception {
-        Bank bank = new BaseBank();
+        Bank bank = new Bank();
         bankService = bank.getBankService();
     }
 

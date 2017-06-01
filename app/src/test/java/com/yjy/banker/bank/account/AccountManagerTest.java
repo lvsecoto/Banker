@@ -7,14 +7,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class BaseAccountManagerTest {
+public class AccountManagerTest {
 
-    private BaseAccountManager mAccountManager;
+    private AccountManager mAccountManager;
     private AccountID superAccountID;
 
     @Before
     public void setUp() throws Exception {
-        mAccountManager = BaseAccountManager.createFrom(new BankDatabaseMocker());
+        mAccountManager = AccountManager.createFrom(new BankDatabaseMocker());
         superAccountID = mAccountManager.applySupperAccount();
     }
 

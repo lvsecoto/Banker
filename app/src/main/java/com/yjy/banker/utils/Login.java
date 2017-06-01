@@ -9,9 +9,7 @@ import android.support.annotation.Nullable;
 import com.yjy.banker.bank.Persistence.BankDatabase;
 import com.yjy.banker.bank.account.AccountID;
 import com.yjy.banker.bank.account.AccountManager;
-import com.yjy.banker.bank.account.BaseAccountManager;
 import com.yjy.banker.bank.bank.Bank;
-import com.yjy.banker.bank.bank.BaseBank;
 import com.yjy.banker.component.service.BankService;
 
 public class Login {
@@ -173,12 +171,12 @@ public class Login {
         AccountManager accountManager;
 
         if (isBankDataBaseIsOld()) {
-            accountManager = BaseAccountManager.createFrom(
+            accountManager = AccountManager.createFrom(
                     new BankDatabase(mContext)
             );
             updateBankDataBaseCreateDate();
         } else {
-            accountManager = BaseAccountManager.loadFrom(
+            accountManager = AccountManager.loadFrom(
                     new BankDatabase(mContext)
             );
         }
@@ -187,7 +185,7 @@ public class Login {
             return null;
         }
 
-        return new BaseBank(accountManager);
+        return new Bank(accountManager);
     }
 
     private boolean isBankDataBaseIsOld() {

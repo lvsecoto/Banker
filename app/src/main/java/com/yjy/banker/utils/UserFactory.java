@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import com.yjy.banker.bank.account.AccountID;
-import com.yjy.banker.bank.bank.BaseUser;
 import com.yjy.banker.bank.bank.User;
 
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class UserFactory {
     @WorkerThread
     public User getUser() throws IOException {
         if (mUser == null) {
-            mUser = new BaseUser(mAccountID, mSeverAddress);
+            mUser = new User(mAccountID, mSeverAddress);
         }
 
         if (!mSeverAddress.equals("127.0.0.1") && !NetWorks.isWifiConnected(mContext)) {

@@ -14,16 +14,16 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
-public class BaseAccountManagerAndroidTest {
+public class AccountManagerAndroidTest {
 
-    private BaseAccountManager mAccountManager;
+    private AccountManager mAccountManager;
     private BankDatabase mBankDatabase;
 
     @Before
     public void setUp() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         mBankDatabase = new BankDatabase(appContext);
-        mAccountManager = BaseAccountManager.createFrom(mBankDatabase);
+        mAccountManager = AccountManager.createFrom(mBankDatabase);
     }
 
     @Test
