@@ -1,9 +1,6 @@
 package com.yjy.banker.bank.service;
 
-import com.yjy.banker.bank.account.AccountID;
-import com.yjy.banker.bank.account.AccountManager;
-import com.yjy.banker.bank.account.IllegalAccountIDException;
-import com.yjy.banker.bank.account.Profile;
+import com.yjy.banker.bank.account.*;
 
 import java.util.HashMap;
 
@@ -72,5 +69,12 @@ public class BankService {
         synchronized (accountManager) {
             return accountManager.getProfileManager().getProfileListModifiedCounter();
         }
+    }
+
+    public MessageManager getMessageManager() {
+        synchronized (accountManager) {
+            return accountManager.getMessageManager();
+        }
+
     }
 }

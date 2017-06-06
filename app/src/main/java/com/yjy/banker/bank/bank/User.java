@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.orhanobut.logger.Logger;
 import com.yjy.banker.bank.account.AccountID;
+import com.yjy.banker.bank.account.Message;
 import com.yjy.banker.bank.account.Profile;
 import com.yjy.banker.bank.communication.BankClient;
 import com.yjy.banker.bank.communication.BankServer;
@@ -11,6 +12,7 @@ import com.yjy.banker.bank.service.*;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
@@ -144,4 +146,26 @@ public class User {
         return isSuccessful;
     }
 
+    public void sendMessage(Message message) throws IOException {
+        RequestSendMessage requestSendMessage =
+                new RequestSendMessage(message);
+        try {
+            bankClient.require(requestSendMessage);
+        } catch (ClassNotFoundException e) {
+            Logger.e("Can not cast require class received from server", e);
+        }
+    }
+
+    public ArrayList<Message> getMessages() throws IOException {
+        RequestGetMessage requestGetMessage =
+                new RequestGetMessage(mAccountID);
+        try {
+            requestGetMessage = (RequestGetMessage) bankClient.require(requestGetMessage);
+            return requestGetMessage.getMessages();
+        } catch (ClassNotFoundException e) {
+            Logger.e("Can not cast require class received from server", e);
+        }
+
+        return null;
+    }
 }

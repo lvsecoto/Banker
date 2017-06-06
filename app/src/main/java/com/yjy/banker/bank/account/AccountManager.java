@@ -13,6 +13,7 @@ public class AccountManager {
     private IBankDatabase mBankDataBase;
     private BalanceManager mBalanceManager;
     private ProfileManager mProfileManager;
+    private MessageManager mMessageManager;
 
     private AccountManager() {
         mBalanceManager = new BalanceManager() {
@@ -29,6 +30,7 @@ public class AccountManager {
                 mBankDataBase.updateProfile(accountID, profile);
             }
         };
+        mMessageManager = new MessageManager();
     }
 
     public static AccountManager createFrom(IBankDatabase bankDataBase) {
@@ -154,4 +156,7 @@ public class AccountManager {
         return mProfileManager;
     }
 
+    public MessageManager getMessageManager() {
+        return mMessageManager;
+    }
 }
