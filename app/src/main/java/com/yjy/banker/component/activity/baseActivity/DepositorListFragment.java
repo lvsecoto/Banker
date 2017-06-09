@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -19,15 +21,18 @@ import com.orhanobut.logger.Logger;
 import com.yjy.banker.R;
 import com.yjy.banker.bank.account.Account;
 import com.yjy.banker.bank.account.AccountID;
+import com.yjy.banker.bank.account.Message;
 import com.yjy.banker.bank.account.Profile;
 import com.yjy.banker.handleableThread.CheckServerUpdateThread;
 import com.yjy.banker.handleableThread.GetBalanceListThread;
+import com.yjy.banker.handleableThread.GetMessageThread;
 import com.yjy.banker.handleableThread.GetProfileListThread;
 import com.yjy.banker.utils.UserFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -69,6 +74,80 @@ public abstract class DepositorListFragment extends ListFragment {
                     Logger.i("Adapter update.");
                 }
             };
+
+    private GetMessageThread mGetMessageThread = null;
+    private GetMessageThread.onUpdateListener mOnMessageGetListener = new GetMessageThread.onUpdateListener() {
+
+        @Override
+        public void onUpdate(@Nullable ArrayList<Message> data, int what) {
+            if (data == null) {
+                return;
+            }
+
+            View rootView = getView();
+            if (rootView == null) {
+                return;
+            }
+
+            showSnackBar(rootView, getMessageAbstract(data));
+            vibrate();
+        }
+
+        private String getMessageAbstract(ArrayList<Message> messages) {
+            StringBuilder abstractBuilder = new StringBuilder();
+            Iterator<Message> iterator = messages.iterator();
+            if (!iterator.hasNext()) {
+                return "";
+            }
+
+            while (true) {
+                Message message = iterator.next();
+                String name = getProfileName(message.getFrom());
+                abstractBuilder.append(
+                        getResources().getString(R.string.message_abstract,
+                                name,
+                                message.getText())
+                );
+
+                if (iterator.hasNext()) {
+                    abstractBuilder.append("\n");
+                } else {
+                    break;
+                }
+            }
+
+            return abstractBuilder.toString();
+        }
+
+        private String getProfileName(AccountID id) {
+            String anonymousString = getString(R.string.anonymous);
+
+            if (mProfileList == null) {
+                return anonymousString;
+            }
+
+            Profile profile = mProfileList.get(id);
+
+            String name = profile.getName();
+
+            if (name == null) {
+                return anonymousString;
+            }
+
+            return name;
+        }
+
+        private void showSnackBar(@NonNull View rootView, String message) {
+            Snackbar snackbar = Snackbar.make(
+                    rootView, message, 1000 * 10);
+            snackbar.show();
+        }
+
+        private void vibrate() {
+            ((Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE))
+                    .vibrate(100);
+        }
+    };
 
     private final GetProfileListThread.OnUpdateListener mOnProfileListUpdateListener =
             new GetProfileListThread.OnUpdateListener() {
@@ -141,6 +220,23 @@ public abstract class DepositorListFragment extends ListFragment {
         mCheckServerUpdateThread = new CheckServerUpdateThread(mUserFactory,
                 mOnServerUpDateListener);
         mCheckServerUpdateThread.start();
+        if (!isHidden()) {
+            mGetMessageThread = new GetMessageThread(mUserFactory, mOnMessageGetListener);
+            mGetMessageThread.start();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            if (mGetMessageThread != null) {
+                mGetMessageThread.stopThread();
+            }
+        } else {
+            mGetMessageThread = new GetMessageThread(mUserFactory, mOnMessageGetListener);
+            mGetMessageThread.start();
+        }
     }
 
     @Override
@@ -148,6 +244,9 @@ public abstract class DepositorListFragment extends ListFragment {
         super.onPause();
         if (mCheckServerUpdateThread != null) {
             mCheckServerUpdateThread.stopThread();
+        }
+        if (mGetMessageThread != null) {
+            mGetMessageThread.stopThread();
         }
     }
 

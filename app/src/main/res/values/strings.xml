@@ -80,4 +80,7 @@
     <string name="title_depositors_fragment">%1$s\'s depositor</string>
     <string name="alert_failed_to_find_account">Can\'t not find account ID</string>
 
+    <!-- message -->
+    <string name="message_abstract">%1$s: %2$s</string>
+
 </resources>
