@@ -20,7 +20,7 @@ import com.yjy.banker.component.activity.dialog.Dialogs;
 import com.yjy.banker.component.activity.dialog.MoneyPickerDialog;
 import com.yjy.banker.handleableThread.CheckServerUpdateThread;
 import com.yjy.banker.handleableThread.GetBalanceListThread;
-import com.yjy.banker.handleableThread.TansferMoneyThread;
+import com.yjy.banker.handleableThread.TransferMoneyThread;
 import com.yjy.banker.utils.UserFactory;
 
 import java.io.Serializable;
@@ -86,11 +86,11 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
                 }
             };
 
-    private final TansferMoneyThread.OnUpdateListener
+    private final TransferMoneyThread.OnUpdateListener
             onTransferMoneyThreadUpdateListener =
-            new TansferMoneyThread.OnUpdateListener() {
+            new TransferMoneyThread.OnUpdateListener() {
                 @Override
-                public void onUpdate(@Nullable Integer result, int what) {
+                public void onUpdate(@Nullable TransferMoneyThread.Result result, int what) {
                     super.onUpdate(result, what);
                     mDialogs.dismissPleaseWaitDialog();
 
@@ -99,7 +99,7 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
                         return;
                     }
 
-                    switch (result) {
+                    switch (result.mResult) {
                         case RequestTransferMoney.RESULT_FAIL:
                             mDialogs.showMessageDialog(R.string.alert_failed_to_transfer_cause_have_not_enough_money);
                             break;
@@ -245,7 +245,7 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
             return;
         }
 
-        new TansferMoneyThread(mUserFactory,
+        new TransferMoneyThread(mUserFactory,
                 mTargetAccountId,
                 money, onTransferMoneyThreadUpdateListener)
                 .start();
