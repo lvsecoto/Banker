@@ -38,6 +38,8 @@
     <string name="label_you_can_create_a_bank">创建银行：</string>
     <string name="label_you_can_join_a_bank">你可以加入银行：</string>
     <string name="logout">注销账户</string>
+    <string name="message_abstract">%1$s: %2$s</string>
+    <string name="message_transfer_money_success">向你转账$%1$d</string>
     <string name="profile_photo">头像</string>
     <string name="bank_ip_address">银行IP地址</string>
     <string name="title_banker_fragment">我的银行</string>

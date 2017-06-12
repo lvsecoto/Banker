@@ -82,5 +82,6 @@
 
     <!-- message -->
     <string name="message_abstract">%1$s: %2$s</string>
+    <string name="message_transfer_money_success">I transfer you $%1$d.</string>
 
 </resources>

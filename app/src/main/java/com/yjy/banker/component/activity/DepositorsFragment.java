@@ -14,12 +14,14 @@ import android.widget.TextView;
 import com.yjy.banker.R;
 import com.yjy.banker.bank.account.Account;
 import com.yjy.banker.bank.account.AccountID;
+import com.yjy.banker.bank.account.Message;
 import com.yjy.banker.bank.account.Profile;
 import com.yjy.banker.bank.service.RequestTransferMoney;
 import com.yjy.banker.component.activity.dialog.Dialogs;
 import com.yjy.banker.component.activity.dialog.MoneyPickerDialog;
 import com.yjy.banker.handleableThread.CheckServerUpdateThread;
 import com.yjy.banker.handleableThread.GetBalanceListThread;
+import com.yjy.banker.handleableThread.SendMessageThread;
 import com.yjy.banker.handleableThread.TransferMoneyThread;
 import com.yjy.banker.utils.UserFactory;
 
@@ -108,8 +110,19 @@ public class DepositorsFragment extends Fragment implements View.OnClickListener
                             break;
                         case RequestTransferMoney.RESULT_SUCCEED:
                             updateBalanceFromServer();
+                            sendSuccessMessageToTargetAccount(result);
                             break;
                     }
+                }
+
+                private void sendSuccessMessageToTargetAccount(@Nullable TransferMoneyThread.Result result) {
+                    Message message = new Message(mAccountID);
+                    message.setTo(result.mTargetAccountId);
+                    message.setText(
+                            getString(R.string.message_transfer_money_success, result.mMoney)
+                    );
+                    new SendMessageThread(mUserFactory, message, null)
+                            .start();
                 }
             };
 
